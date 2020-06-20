@@ -1,0 +1,76 @@
+t = 4 
+loop = True
+from random import *
+while loop :
+    j = 0 
+    P=[randint(0, t),randint(0, t)]
+    E=[randint(0, t),randint(0, t)]
+    while E == P :
+        E=[randint(0, t),randint(0, t)]
+        if E != P :
+            break
+    K=[randint(0, t),randint(0, t)]
+    while K ==P or K == E :
+        K=[randint(0, t),randint(0, t)]
+        if K != P and K != E :
+            break
+    GameOver = True
+    while GameOver :
+        for i in range(t+1) :
+            for j in range (t+1):
+                if i == E[0] and j == E[1] :
+                    print("E", end=" ")
+                elif i== P[0] and j== P[1]:
+                    print("P",end=" ")
+                elif i== K[0] and j == K[1]:
+                    print("K",end=" ")    
+                else :
+                    print("_",end=" ")
+            print()
+        if K[0]==P[0]and K[1]==P[1] :
+            K=[15,15]
+        if t==9 and P[0]==E[0] and P[1] == E [1] and K ==[15,15]:
+            print ('Victory')
+            cak = True 
+            while cak :
+                a = input(" play again ? :" ).upper()
+                if a == "N" :
+                    GameOver = False
+                    loop = False
+                    cak = False
+                    j = 1
+                    break 
+                if a == "Y" :
+                    t= 4
+                    j = 1
+                    break
+                else : 
+                    print("unidentified order , please try again")                   
+                    j = 1
+        if j == 1 : 
+            break
+        if P[0]==E[0] and P[1] == E [1] and K ==[15,15]:
+            t += 1
+            j = 1 
+            break 
+        temPos =P[:]
+        k= input( "move:").lower()
+        if k == "remake" or k == "ff" :
+            j = 1
+            break
+        if k == "sur" or k == "quit" :
+            GameOver = False
+            loop = False
+            break   
+        if k == "w" :
+            temPos[0]+=-1
+        if k == "s" :
+            temPos[0]+=1
+        if k == "a" :
+            temPos[1]+=-1
+        if k == "d" :
+            temPos[1]+=1
+        if temPos[0] >= 0 and temPos [0] <(t+1) and temPos[1] >=0 and temPos[1]<(t+1) and temPos!=E  :
+            P = temPos[:]
+        if K == [15,15] and temPos[0] >= 0 and temPos [0] <(t+1) and temPos[1] >=0 and temPos[1]<(t+1) :
+            P = temPos[:]
